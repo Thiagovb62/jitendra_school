@@ -42,8 +42,9 @@ Admin can announce notice also.
  venv\Scripts\activate 
  python -m pip install -r requirements.txt 
  pip install setuptools
- pip install django-widget-tweaks```
-- 
+ pip install django-widget-tweaks
+ ```
+
 ```
 py manage.py makemigrations
 py manage.py migrate
