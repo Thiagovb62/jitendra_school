@@ -28,7 +28,7 @@ They can update any student/teacher details.
 Admin can announce notice also.
 
 ## IDE
-- PyCharm Community Edition
+- PyCharm Community Edition or visual studio code
 
 ## Drawbacks
 - On update page of teacher/student you must have to update password.
