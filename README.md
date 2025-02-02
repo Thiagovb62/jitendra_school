@@ -37,11 +37,12 @@ Admin can announce notice also.
 ## HOW TO RUN THIS PROJECT
 - Install Python(3.12) (Dont Forget to Tick Add to Path while installing Python)
 - Open Terminal and Execute Following Commands :
-```  python -m venv venv ```
-```  venv\Scripts\activate ```
-``` python -m pip install -r requirements.txt ```
-``` pip install setuptools```
-``` pip install django-widget-tweaks```
+``` 
+ python -m venv venv
+ venv\Scripts\activate 
+ python -m pip install -r requirements.txt 
+ pip install setuptools
+ pip install django-widget-tweaks```
 - 
 ```
 py manage.py makemigrations
