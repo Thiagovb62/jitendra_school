@@ -50,7 +50,7 @@ class AskDateForm(forms.Form):
 class NoticeForm(forms.ModelForm):
     class Meta:
         model=models.Notice
-        fields='__all__'
+        fields=['message', 'by', 'date']
 
 
 
