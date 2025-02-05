@@ -297,6 +297,8 @@ def admin_view_teacher_salary_view(request):
 def admin_student_view(request):
     return render(request,'school/admin_student.html')
 
+def form_valid():
+    print("form is valid")
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -308,7 +310,7 @@ def admin_add_student_view(request):
         form1=forms.StudentUserForm(request.POST)
         form2=forms.StudentExtraForm(request.POST)
         if form1.is_valid() and form2.is_valid():
-            print("form is valid")
+            form_valid()
             user=form1.save()
             user.set_password(user.password)
             user.save()
@@ -321,7 +323,7 @@ def admin_add_student_view(request):
             my_student_group = Group.objects.get_or_create(name='STUDENT')
             my_student_group[0].user_set.add(user)
         else:
-            print("form is invalid")
+            form_valid()
         return HttpResponseRedirect('admin-student')
     return render(request,'school/admin_add_student.html',context=mydict)
 
@@ -431,7 +433,7 @@ def admin_take_attendance_view(request,cl):
                 AttendanceModel.save()
             return redirect('admin-attendance')
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/admin_take_attendance.html',{'students':students,'aform':aform})
 
 
@@ -449,7 +451,7 @@ def admin_view_attendance_view(request,cl):
             mylist=zip(attendancedata,studentdata)
             return render(request,'school/admin_view_attendance_page.html',{'cl':cl,'mylist':mylist,'date':date})
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/admin_view_attendance_ask_date.html',{'cl':cl,'form':form})
 
 
@@ -542,7 +544,7 @@ def teacher_take_attendance_view(request,cl):
                 AttendanceModel.save()
             return redirect('teacher-attendance')
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/teacher_take_attendance.html',{'students':students,'aform':aform})
 
 
@@ -560,7 +562,7 @@ def teacher_view_attendance_view(request,cl):
             mylist=zip(attendancedata,studentdata)
             return render(request,'school/teacher_view_attendance_page.html',{'cl':cl,'mylist':mylist,'date':date})
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/teacher_view_attendance_ask_date.html',{'cl':cl,'form':form})
 
 
@@ -577,7 +579,7 @@ def teacher_notice_view(request):
             form.save()
             return redirect('teacher-dashboard')
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/teacher_notice.html',{'form':form})
 
 
@@ -615,7 +617,7 @@ def student_attendance_view(request):
             mylist=zip(attendancedata,studentdata)
             return render(request,'school/student_view_attendance_page.html',{'mylist':mylist,'date':date})
         else:
-            print('form invalid')
+            form_valid()
     return render(request,'school/student_view_attendance_ask_date.html',{'form':form})
 
 
