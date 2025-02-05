@@ -26,8 +26,8 @@ classes=[('one','one'),('two','two'),('three','three'),
 class StudentExtra(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     roll = models.CharField(max_length=10)
-    mobile = models.CharField(max_length=40,null=True)
-    fee=models.PositiveIntegerField(null=True)
+    mobile = models.CharField(max_length=40,blank=True)
+    fee=models.PositiveIntegerField(blank=True)
     cl= models.CharField(max_length=10,choices=classes,default='one')
     status=models.BooleanField(default=False)
     @property
@@ -42,7 +42,7 @@ class StudentExtra(models.Model):
 
 
 class Attendance(models.Model):
-    roll=models.CharField(max_length=10,null=True)
+    roll=models.CharField(max_length=10,blank=True)
     date=models.DateField()
     cl=models.CharField(max_length=10)
     present_status = models.CharField(max_length=10)
@@ -51,5 +51,5 @@ class Attendance(models.Model):
 
 class Notice(models.Model):
     date=models.DateField(auto_now=True)
-    by=models.CharField(max_length=20,null=True,default='school')
+    by=models.CharField(max_length=20,blank=True,default='school')
     message=models.CharField(max_length=500)
