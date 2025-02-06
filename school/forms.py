@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
+from .models import Notice
 
 #for admin
 class AdminSigupForm(forms.ModelForm):
@@ -49,8 +50,8 @@ class AskDateForm(forms.Form):
 #for notice related form
 class NoticeForm(forms.ModelForm):
     class Meta:
-        model=models.Notice
-        fields=['message', 'by', 'date']
+        model = Notice
+        exclude = ['date']
 
 
 
