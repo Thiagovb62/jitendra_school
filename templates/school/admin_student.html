@@ -2,15 +2,19 @@
 
 
 
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <title>Administração de Estudantes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
 
-    <style type="text/css">
-        a:link {
+    <!-- Estilos e Fontes -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <style>
+        a {
             text-decoration: none;
         }
         
@@ -40,11 +44,9 @@
         
         .card {
             border-radius: 5px;
-            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
             box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
             border: none;
             margin-bottom: 30px;
-            -webkit-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
         }
         
@@ -65,9 +67,8 @@
         }
     </style>
 </head>
-
 <body>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-xl-3">
@@ -77,8 +78,7 @@
                             <h6 class="m-b-20">View All Student</h6>
                         </a>
                         <br>
-                        <h2 class="text-right"><i class="fas fa-eye f-left"></i></h2>
-
+                        <h2 class="text-right"><i class="fas fa-eye f-left"></i> 1</h2>
                     </div>
                 </div>
             </div>
@@ -90,11 +90,14 @@
                             <h6 class="m-b-20">Add Student</h6>
                         </a>
                         <br>
-                        <h2 class="text-right"><i class="fas fa-plus-circle f-left"></i></h2>
+                        <h2 class="text-right">
+                            <i class="fas fa-plus-circle f-left"></i> Adicionar Estudante
+                        </h2>
                     </div>
                 </div>
             </div>
-
+            
+            </div>
             <div class="col-md-4 col-xl-3">
                 <div class="card bg-c-yellow order-card">
                     <div class="card-block">
@@ -102,34 +105,38 @@
                             <h6 class="m-b-20">Approve Student</h6>
                         </a>
                         <br>
-                        <h2 class="text-right"><i class="fas fa-check-circle f-left"></i></h2>
+                        <h2 class="text-right">
+                            <i class="fas fa-check-circle f-left"></i> Aprovar Estudante
+                        </h2>
                     </div>
                 </div>
             </div>
-
+            
+            </div>
             <div class="col-md-4 col-xl-3">
-                <div class="card bg-c-pink order-card">
-                    <div class="card-block">
-                        <a href="/admin-view-student-fee">
-                            <h6 class="m-b-20">View Student Fee</h6>
-                        </a>
-                        <br>
-                        <h2 class="text-right"><i class="fas fa-rupee-sign f-left"></i></h2>
-                    </div>
-                </div>
+    <div class="card bg-c-pink order-card">
+        <div class="card-block">
+            <a href="/admin-view-student-fee">
+                <h6 class="m-b-20">View Student Fee</h6>
+            </a>
+            <br>
+            <h2 class="text-right">
+                <i class="fas fa-rupee-sign f-left"></i> Ver Taxas do Estudante
+            </h2>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
-        <br><br><br><br><br><br><br><br>
     </div>
 
+    <!-- Scripts no final para melhor performance -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
-
-
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-    </script>
 </body>
+</html>
 
 
 {% endblock content %}
