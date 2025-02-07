@@ -51,7 +51,7 @@ class AskDateForm(forms.Form):
 class NoticeForm(forms.ModelForm):
     class Meta:
         model = Notice
-        exclude = ['date']
+        fields = [field.name for field in Notice._meta.fields if field.name != 'date']
 
 
 
