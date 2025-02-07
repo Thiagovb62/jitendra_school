@@ -48,7 +48,7 @@
 </div><br>
 {%for n in notice%}
 <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <span class="closebtn" onclick="this.parentElement.style.display='none';" role="button">&times;</span>
   <strong>{{n.date}} || By : {{n.by}}</strong><br> {{n.message}}
 </div>
 {%endfor%}
