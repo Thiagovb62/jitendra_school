@@ -49,12 +49,12 @@
 </div><br>
 {%for n in notice%}
 <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';" role="button">&times;</span>
+  <button class="closebtn" onclick="this.parentElement.style.display='none';" aria-label="Close">&times;</button>
   <strong>{{n.date}} || By : {{n.by}}</strong><br> {{n.message}}
 </div>
-{%endfor%}
+{%end for%}
 
 
 
 
-{% endblock content %}
+{% end block content %}
