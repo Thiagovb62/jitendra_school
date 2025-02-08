@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <style type="text/css">
+    <style>
         body {
             color: #aa082e;
             background-color: #b6bde7;
@@ -62,7 +62,7 @@
     <br><br>
 
     <!--- signup page for teacher by admin ---------->
-    <form method="post">
+    <form method="post" action="{% url}">
         {% csrf_token %}
         <div class="container register-form">
             <div class="form">
