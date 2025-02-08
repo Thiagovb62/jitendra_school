@@ -423,12 +423,12 @@ def admin_take_attendance_view(request,cl):
             attendances=request.POST.getlist('present_status')
             date=form.cleaned_data['date']
             for i in range(len(attendances)):
-                AttendanceModel=models.Attendance()
-                AttendanceModel.cl=cl
-                AttendanceModel.date=date
-                AttendanceModel.present_status=attendances[i]
-                AttendanceModel.roll=students[i].roll
-                AttendanceModel.save()
+                attendance_model=models.Attendance()
+                attendance_model.cl=cl
+                attendance_model.date=date
+                attendance_model.present_status=attendances[i]
+                attendance_model.roll=students[i].roll
+                attendance_model.save()
             return redirect('admin-attendance')
         else:
             form_valid()
@@ -534,12 +534,12 @@ def teacher_take_attendance_view(request,cl):
             attendances=request.POST.getlist('present_status')
             date=form.cleaned_data['date']
             for i in range(len(attendances)):
-                AttendanceModel=models.Attendance()
-                AttendanceModel.cl=cl
-                AttendanceModel.date=date
-                AttendanceModel.present_status=attendances[i]
-                AttendanceModel.roll=students[i].roll
-                AttendanceModel.save()
+                attendance_model=models.Attendance()
+                attendance_model.cl=cl
+                attendance_model.date=date
+                attendance_model.present_status=attendances[i]
+                attendance_model.roll=students[i].roll
+                attendance_model.save()
             return redirect('teacher-attendance')
         else:
             form_valid()
