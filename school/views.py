@@ -420,15 +420,15 @@ def admin_take_attendance_view(request,cl):
     if request.method=='POST':
         form=forms.AttendanceForm(request.POST)
         if form.is_valid():
-            Attendances=request.POST.getlist('present_status')
+            attendances=request.POST.getlist('present_status')
             date=form.cleaned_data['date']
-            for i in range(len(Attendances)):
-                AttendanceModel=models.Attendance()
-                AttendanceModel.cl=cl
-                AttendanceModel.date=date
-                AttendanceModel.present_status=Attendances[i]
-                AttendanceModel.roll=students[i].roll
-                AttendanceModel.save()
+            for i in range(len(attendances)):
+                attendance_model=models.Attendance()
+                attendance_model.cl=cl
+                attendance_model.date=date
+                attendance_model.present_status=attendances[i]
+                attendance_model.roll=students[i].roll
+                attendance_model.save()
             return redirect('admin-attendance')
         else:
             form_valid()
@@ -531,15 +531,15 @@ def teacher_take_attendance_view(request,cl):
     if request.method=='POST':
         form=forms.AttendanceForm(request.POST)
         if form.is_valid():
-            Attendances=request.POST.getlist('present_status')
+            attendances=request.POST.getlist('present_status')
             date=form.cleaned_data['date']
-            for i in range(len(Attendances)):
-                AttendanceModel=models.Attendance()
-                AttendanceModel.cl=cl
-                AttendanceModel.date=date
-                AttendanceModel.present_status=Attendances[i]
-                AttendanceModel.roll=students[i].roll
-                AttendanceModel.save()
+            for i in range(len(attendances)):
+                attendance_model=models.Attendance()
+                attendance_model.cl=cl
+                attendance_model.date=date
+                attendance_model.present_status=attendances[i]
+                attendance_model.roll=students[i].roll
+                attendance_model.save()
             return redirect('teacher-attendance')
         else:
             form_valid()
