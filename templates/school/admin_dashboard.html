@@ -16,8 +16,11 @@
       color: white;
     }
 
-    .w3-panel p {
+    .w3-panel {
       padding-top: 10px;
+      padding-bottom: 20px;
+      margin-top: 200px;
+      background-color: #2196F3;
     }
 
     .closebtn {
@@ -34,6 +37,19 @@
     .closebtn:hover {
       color: black;
     }
+
+    .notice {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      font-size: 20px;
+      font-weight: bold;
+
+      text-align: center;
+    }
+
+    .closebtn:hover {
+      color: black;
+    }
   </style>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <title>Painel Do Administador</title>
@@ -45,7 +61,7 @@
 
 <br><br>
 <div class="w3-panel w3-blue ">
-  <p>Notice Board</p>
+  <p class="notice">Notice Board</p>
 </div><br>
 {%for n in notice%}
 <div class="alert">

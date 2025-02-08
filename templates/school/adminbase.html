@@ -37,21 +37,22 @@
         }
 
         .logout_btn {
-            padding: 5px;
-            background: #19B3D3;
-            text-decoration: none;
-            float: right;
-            margin-top: -30px;
-            margin-right: 40px;
-            border-radius: 2px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #fff;
-            transition: 0.5s;
+            padding: 5px 20px;
+            background: #ff4b5c;
+            border: 2px solid #ff4b5c;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
+        /* Efeito ao passar o mouse */
         .logout_btn:hover {
-            background: #0B87A6;
+            background: white;
+            color: #ff4b5c;
+            border: 2px solid #ff4b5c;
         }
 
         .sidebar {
@@ -114,15 +115,15 @@
             color: #19B3D3;
         }
 
-        #check:checked~.sidebar {
+        #check:checked ~ .sidebar {
             left: -190px;
         }
 
-        #check:checked~.sidebar a span {
+        #check:checked ~ .sidebar a span {
             display: none;
         }
 
-        #check:checked~.sidebar a {
+        #check:checked ~ .sidebar a {
             font-size: 20px;
             margin-left: 170px;
             width: 80px;
@@ -137,7 +138,7 @@
             transition: 0.5s;
         }
 
-        #check:checked~.content {
+        #check:checked ~ .content {
             margin-left: 60px;
         }
 
@@ -154,49 +155,50 @@
 
 <body>
 
-    <input type="checkbox" id="check">
-    <!--header area start-->
-    <header>
-        <label for="check">
-            <i class="fas fa-bars" id="sidebar_btn"></i>
-        </label>
-        <div class="left_area">
-            <h3>School Management</h3>
-        </div>
-        <div class="right_area">
-            <a href="/logout" class="logout_btn">Logout</a>
-        </div>
-    </header>
-    <!--header area end-->
-    <!--sidebar start-->
-    <div class="sidebar">
-        <div style="text-align:center">
+<input type="checkbox" id="check">
+<!--header area start-->
+<header>
+    <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area">
+        <h3>School Management</h3>
+    </div>
+    <form method="POST" action="/logout" style="float: right; margin-top: -30px; margin-right: 40px;">
+        {% csrf_token %}
+        <button type="submit" class="logout_btn">Logout</button>
+    </form>
+</header>
+<!--header area end-->
+<!--sidebar start-->
+<div class="sidebar">
+    <div style="text-align:center">
 
-            <img src="{% static 'images/admin.jpeg' %}" alt="Admin" style="width:100%">
-            <h4>{{request.user.first_name}}</h4>
-
-        </div>
-
-        <a href="/admin-dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-        <a href="/admin-teacher"><i class="fas fa-chalkboard-teacher"></i><span>Teacher</span></a>
-        <a href="/admin-student"><i class="fas fa-user-graduate"></i><span>Student</span></a>
-        <a href="/admin-attendance"><i class="fas fa-address-card"></i><span>Attendance</span></a>
-        <a href="/admin-fee"><i class="fas fa-search-dollar"></i><span>Fee</span></a>
-        <a href="/admin-notice"><i class="fas fa-bullhorn"></i><span>Notice</span></a>
-
+        <img src="{% static 'images/admin.jpeg' %}" alt="Admin" style="width:100%">
+        <h4>{{request.user.first_name}}</h4>
 
     </div>
-    <!--sidebar end-->
+
+    <a href="/admin-dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+    <a href="/admin-teacher"><i class="fas fa-chalkboard-teacher"></i><span>Teacher</span></a>
+    <a href="/admin-student"><i class="fas fa-user-graduate"></i><span>Student</span></a>
+    <a href="/admin-attendance"><i class="fas fa-address-card"></i><span>Attendance</span></a>
+    <a href="/admin-fee"><i class="fas fa-search-dollar"></i><span>Fee</span></a>
+    <a href="/admin-notice"><i class="fas fa-bullhorn"></i><span>Notice</span></a>
 
 
-    <!--content start-->
-    <div class="content">
-        <br><br><br><br><br> {% block content %} {% endblock content %}
+</div>
+<!--sidebar end-->
 
 
-        <br><br><br> {% include "school/footer.html" %}
-    </div>
-    <!--content end-->
+<!--content start-->
+<div class="content">
+    <br><br><br><br><br> {% block content %} {% endblock content %}
+
+
+    <br><br><br> {% include "school/footer.html" %}
+</div>
+<!--content end-->
 
 </body>
 
