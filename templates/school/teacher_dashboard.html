@@ -16,8 +16,10 @@
       color: white;
     }
 
-    .w3-panel p {
+    .w3-panel {
       padding-top: 10px;
+      padding-bottom: 20px;
+      margin-top: 200px;
     }
 
     .closebtn {
@@ -29,6 +31,14 @@
       line-height: 20px;
       cursor: pointer;
       transition: 0.3s;
+    }
+     .notice {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      font-size: 20px;
+      font-weight: bold;
+
+      text-align: center;
     }
 
     .closebtn:hover {
@@ -45,16 +55,16 @@
 
 <br><br>
 <div class="w3-panel w3-blue ">
-  <p>Notice Board</p>
+  <p class="notice">Notice Board</p>
 </div><br>
 {%for n in notice%}
 <div class="alert">
   <button class="closebtn" onclick="this.parentElement.style.display='none';" aria-label="Close">&times;</button>
   <strong>{{n.date}} || By : {{n.by}}</strong><br> {{n.message}}
 </div>
-{%end for%}
+{%endfor%}
 
 
 
 
-{% end block content %}
+{% endblock content %}
