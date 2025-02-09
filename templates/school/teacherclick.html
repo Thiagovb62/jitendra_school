@@ -1,16 +1,78 @@
 {% extends 'school/homebase.html' %}
 {% block content %}
-<br>
-<br>
-<div class="jumbotron" style="margin-bottom:0px;">
-  <h1 class="display-4">Hello, Teacher</h1>
-  <p class="lead">Welcome to School Management System.</p>
-  <hr class="my-4">
-  <p>You can access various features after Login.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="teachersignup" role="button">Apply For Job</a>
-    <a class="btn btn-primary btn-lg" href="teacherlogin" role="button">Login</a>
-  </p>
+<style>
+    body {
+        background: linear-gradient(to right, #74ebd5, #acb6e5);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .jumbotron {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 80%;
+        max-width: 600px;
+    }
+
+    .jumbotron h1 {
+        font-weight: 700;
+        color: #333;
+    }
+
+    .jumbotron p {
+        font-size: 18px;
+        color: #555;
+    }
+
+    .btn-custom {
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-success {
+        background: #28a745;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background: #218838;
+        transform: scale(1.05);
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+</style>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, Teacher</h1>
+        <p class="lead">Welcome to School Management System.</p>
+        <hr class="my-4">
+        <p>You can access various features after Login.</p>
+        <p class="lead">
+            <button class="tn btn-success btn-lg btn-custom mx-2" onclick="window.location.href='teachersingup'" >Apply For Job</button>
+            <button class="btn btn-primary btn-lg btn-custom mx-2" onclick="window.location.href='teacherlogin'">Login</button>
+        </p>
+    </div>
 </div>
 {% endblock content %}
 

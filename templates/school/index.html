@@ -4,70 +4,76 @@
 <head>
     <meta charset="utf-8">
     <title>Página Inicial</title>
-    <style media="screen">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
         .jumbotron {
-            margin-top: 0px;
-            margin-bottom: 0px;
-            background-image: url('{% static "images/bg2.jpg" %}');
+            margin: 0;
+
+            padding: 50px 40px;
+            background: url('{% static "images/bg2.jpg" %}') no-repeat center;
             background-size: cover;
-            background-repeat: no-repeat;
-        }
-        
-        .jumbotron h1 {
             text-align: center;
+            color: #0062cc;
         }
-        
-        .alert {
-            margin: 0px;
-        }
-        
+
         .glow {
-            font-size: 70px;
-            color: #ffffff;
-            text-align: center;
-            -webkit-animation: glow 1s ease-in-out infinite alternate;
-            -moz-animation: glow 1s ease-in-out infinite alternate;
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000;
             animation: glow 1s ease-in-out infinite alternate;
         }
-        
-        @-webkit-keyframes glow {
+
+        @keyframes glow {
             from {
-                text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 0 0 50px #9554b3, 0 0 60px #9554b3, 0 0 70px #9554b3;
+                text-shadow: 0 0 10px #eee, 0 0 20px #000, 0 0 30px #000;
             }
             to {
-                text-shadow: 0 0 20px #eeeeee, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+                text-shadow: 0 0 20px #eee, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
             }
         }
-    </style>
 
+        .lead {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .btn-custom {
+            font-size: 18px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: 0.3s;
+            width: 200px; /* Set a fixed width */
+            margin: 20px auto; /* Center the button */
+            padding: 10px 20px; /* Padding */
+            display: block; /* Ensure the button is a block element */
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    </style>
 </head>
 
 <body>
-    {% include "school/navbar.html" %}
-    <br>
-    <br>
-    <div class="jumbotron" style="margin-bottom: 0px;margin-top: 0px;">
-        <br>
-        <h1 class="display-4 glow">Welcome</h1>
+{% include "school/navbar.html" %}
 
-        <br><br>
-        <p>Knowledge is key to success.</p>
-        <br><br><br><br><br>
-        <p class="lead">
-            <button class="btn btn-primary btn-lg" onclick="window.location.href='studentsignup'">Take Admission</button>
-        </p>
-        <br><br>
-    </div>
+<div class="jumbotron">
+    <h1 class="glow">Welcome</h1>
+    <p class="lead" style= > Knowledge is key to success.</p>
+</div>
 
-    <br>
-    <br>
-    <br><br> {% include "school/admin_teacher_student_card.html" %}
-
-    <br><br>
-    <br>
-    <br>
-    <br>
-    <br> {% include "school/footer.html" %}
+{% include "school/admin_teacher_student_card.html" %}
+<button class="btn-custom" onclick="window.location.href='studentsignup'">Take Admission</button>
+{% include "school/footer.html" %}
 </body>
 
 </html>
