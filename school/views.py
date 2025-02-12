@@ -88,12 +88,12 @@ def teacher_signup_view(request):
             user=form1.save()
             user.set_password(user.password)
             user.save()
-            f2=form2.save(commit=False)
-            f2.user=user
-
+            f2 = form2.save(commit=False)
+            f2.user = user
+            f2.status = False
+            f2.save()
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
-
         return HttpResponseRedirect('teacherlogin')
     return render(request,'school/teachersignup.html',context=mydict)
 
