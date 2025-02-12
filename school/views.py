@@ -8,12 +8,11 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.core.mail import send_mail
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def home_view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request == 'POST':
         return HttpResponseRedirect('afterlogin')
     return render(request,'school/index.html')
-
 
 
 #for showing signup/login button for teacher
@@ -42,7 +41,6 @@ def studentclick_view(request):
 
 
 
-@require_http_methods(["GET", "POST"])
 def admin_signup_view(request):
     form=forms.AdminSigupForm()
     if request.method=='POST':
@@ -58,7 +56,6 @@ def admin_signup_view(request):
 
 
 
-@require_http_methods(["GET", "POST"])
 def student_signup_view(request):
     form1=forms.StudentUserForm()
     form2=forms.StudentExtraForm()
@@ -74,11 +71,11 @@ def student_signup_view(request):
             f2.user=user
             my_student_group = Group.objects.get_or_create(name='STUDENT')
             my_student_group[0].user_set.add(user)
-
+            print("user created" + str(user))
         return HttpResponseRedirect('studentlogin')
     return render(request,'school/studentsignup.html',context=mydict)
 
-@require_http_methods(["GET", "POST"])
+
 def teacher_signup_view(request):
     form1=forms.TeacherUserForm()
     form2=forms.TeacherExtraForm()
@@ -180,7 +177,7 @@ def admin_dashboard_view(request):
 def admin_teacher_view(request):
     return render(request,'school/admin_teacher.html')
     
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_add_teacher_view(request):
@@ -194,12 +191,10 @@ def admin_add_teacher_view(request):
             user=form1.save()
             user.set_password(user.password)
             user.save()
-
             f2=form2.save(commit=False)
             f2.user=user
             f2.status=True
             f2.save()
-
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
 
@@ -220,16 +215,17 @@ def admin_approve_teacher_view(request):
     teachers=models.TeacherExtra.objects.all().filter(status=False)
     return render(request,'school/admin_approve_teacher.html',{'teachers':teachers})
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods("GET")
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def approve_teacher_view(request,pk):
     teacher=models.TeacherExtra.objects.get(id=pk)
     teacher.status=True
     teacher.save()
-    return redirect(reverse('admin-approve-teacher'))
+    return redirect('admin-approve-teacher')
 
-@require_http_methods(["GET", "POST"])
+
+@require_http_methods(["GET"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def delete_teacher_view(request,pk):
@@ -239,7 +235,8 @@ def delete_teacher_view(request,pk):
     teacher.delete()
     return redirect('admin-approve-teacher')
 
-@require_http_methods(["GET", "POST"])
+
+@require_http_methods(["GET"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def delete_teacher_from_school_view(request,pk):
@@ -249,17 +246,14 @@ def delete_teacher_from_school_view(request,pk):
     teacher.delete()
     return redirect('admin-view-teacher')
 
-@require_http_methods(["GET", "POST"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def update_teacher_view(request,pk):
     teacher=models.TeacherExtra.objects.get(id=pk)
     user=models.User.objects.get(id=teacher.user_id)
-
     form1=forms.TeacherUserForm(instance=user)
     form2=forms.TeacherExtraForm(instance=teacher)
     mydict={'form1':form1,'form2':form2}
-
     if request.method=='POST':
         form1=forms.TeacherUserForm(request.POST,instance=user)
         form2=forms.TeacherExtraForm(request.POST,instance=teacher)
@@ -292,7 +286,7 @@ def admin_student_view(request):
 def form_valid():
     print("form is valid")
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_add_student_view(request):
@@ -337,7 +331,7 @@ def delete_student_from_school_view(request,pk):
     student.delete()
     return redirect('admin-view-student')
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def delete_student_view(request,pk):
@@ -347,7 +341,6 @@ def delete_student_view(request,pk):
     student.delete()
     return redirect('admin-approve-student')
 
-@require_http_methods(["GET", "POST"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def update_student_view(request,pk):
@@ -376,9 +369,10 @@ def update_student_view(request,pk):
 @user_passes_test(is_admin)
 def admin_approve_student_view(request):
     students=models.StudentExtra.objects.all().filter(status=False)
+    print(students)
     return render(request,'school/admin_approve_student.html',{'students':students})
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def approve_student_view(request,pk):
@@ -401,7 +395,7 @@ def admin_view_student_fee_view(request):
 def admin_attendance_view(request):
     return render(request,'school/admin_attendance.html')
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_take_attendance_view(request,cl):
@@ -417,7 +411,7 @@ def admin_take_attendance_view(request,cl):
     return render(request,'school/admin_take_attendance.html',{'students':students,'aform':aform})
 
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_view_attendance_view(request,cl):
@@ -434,14 +428,6 @@ def admin_view_attendance_view(request,cl):
             form_valid()
     return render(request,'school/admin_view_attendance_ask_date.html',{'cl':cl,'form':form})
 
-
-
-
-
-
-
-
-
 @require_http_methods(["GET"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -456,8 +442,6 @@ def admin_view_fee_view(request,cl):
     feedetails=models.StudentExtra.objects.all().filter(cl=cl)
     return render(request,'school/admin_view_fee.html',{'feedetails':feedetails,'cl':cl})
 
-
-@require_http_methods(["GET", "POST"])
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_notice_view(request):
@@ -471,14 +455,7 @@ def admin_notice_view(request):
             return redirect('admin-dashboard')
     return render(request,'school/admin_notice.html',{'form':form})
 
-
-
-
-
-
-
-
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
@@ -493,7 +470,7 @@ def teacher_dashboard_view(request):
     return render(request,'school/teacher_dashboard.html',context=mydict)
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_attendance_view(request):
@@ -512,7 +489,7 @@ def save_attendance(cl, form, students, request):
         attendance_model.save()
     return redirect('teacher-attendance')
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_take_attendance_view(request,cl):
@@ -527,7 +504,7 @@ def teacher_take_attendance_view(request,cl):
     return render(request,'school/teacher_take_attendance.html',{'students':students,'aform':aform})
 
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_view_attendance_view(request,cl):
@@ -545,7 +522,7 @@ def teacher_view_attendance_view(request,cl):
     return render(request,'school/teacher_view_attendance_ask_date.html',{'cl':cl,'form':form})
 
 
-@require_http_methods(["GET", "POST"])
+
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_notice_view(request):
@@ -562,12 +539,7 @@ def teacher_notice_view(request):
     return render(request,'school/teacher_notice.html',{'form':form})
 
 
-
-
-
-
-
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_dashboard_view(request):
@@ -582,7 +554,6 @@ def student_dashboard_view(request):
     return render(request,'school/student_dashboard.html',context=mydict)
 
 
-@require_http_methods(["GET", "POST"])
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_attendance_view(request):
@@ -601,18 +572,11 @@ def student_attendance_view(request):
 
 
 
-
-
-
-
-
-
 # for aboutus and contact us
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def aboutus_view(request):
     return render(request,'school/aboutus.html')
 
-@require_http_methods(["GET", "POST"])
 def contactus_view(request):
     sub = forms.ContactusForm()
     if request.method == 'POST':
